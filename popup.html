@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOTVS Jira Helper</title>
+
+    <style>
+        body {
+            width: 320px;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 6px;
+            border: 1px solid #000;
+            padding: 6px;
+            border-radius: 3px;
+        }
+
+        span {
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>
+            <span>Tarefa</span>
+            <p id="issue-id-value">carregando...</p>
+        </li>
+        <li>
+            <span>Descrição para o cliente</span>
+            <p id="issue-customer-description">carregando...</p>
+        </li>
+    </ul>
+</body>
+<script src="popup.js"></script>
+</html>
