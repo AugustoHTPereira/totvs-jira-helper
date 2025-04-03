@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "DOM Viewer",
+    "name": "TOTVS Jira Helper",
     "version": "1.0",
-    "description": "Exibe o valor de um elemento do DOM por ID",
+    "description": "Obter dados da issue",
     "permissions": [
         "scripting",
         "activeTab"
