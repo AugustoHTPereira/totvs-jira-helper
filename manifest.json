@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "TOTVS Jira Helper",
-    "version": "1.0",
+    "version": "1.0.1",
     "description": "Obter dados da issue",
     "permissions": [
         "scripting",
