@@ -9,21 +9,15 @@ TOTVS Jira Helper é uma extensão leve e prática que permite ao usuário visua
 
 ## 📦 Instalação
 
-1. Baixe ou clone este repositório:
-    
-    ```bash
-    git clone <https://github.com/seuusuario/dom-viewer-extension.git>
-    ```
-    
-2. No Chrome, acesse `chrome://extensions/`
-3. Ative o **Modo do desenvolvedor**
-4. Clique em **Carregar sem compactação** e selecione a pasta do projeto
+1. Acesse a extensão pelo Chrome Web Store clicando no link
+https://chromewebstore.google.com/detail/phldiacidhdfcalmhgebfncipidhmdmc?utm_source=item-share-cb
+2. Clique em Usar no Chrome
 
 ## 🧠 Como Usar
 
 1. Acesse a subtask do Jira
-2. Clique no ícone da extensão já instalada
-3. Copie a informação disponibilizada
+2. Abra a extensão
+3. Clique na informação desejada
 4. Cole no commit ou check-in ou pull-request
 
 ## 🔐 Política de Privacidade
