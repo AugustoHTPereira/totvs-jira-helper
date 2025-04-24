@@ -4,47 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOTVS Jira Helper</title>
-
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
-
-        body {
-            width: 320px;
-            padding: 6px;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        li {
-            margin-bottom: 6px;
-            border: 1px solid #000;
-            padding: 6px;
-            border-radius: 3px;
-        }
-
-        span {
-            color: gray;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/tw-styles.css">
 </head>
-<body>
-    <ul>
-        <li>
-            <span>Tarefa</span>
-            <p id="issue-id-value">carregando...</p>
-        </li>
-        <li>
-            <span>Descrição para o cliente</span>
-            <p id="issue-customer-description">carregando...</p>
-        </li>
-    </ul>
+<body class="dark">
+    <div class="w-full max-w-sm mx-auto p-1">
+        <div>
+            <h1 class="font-semibold">TOTVS Jira Helper</h1>
+        </div>
 
-    <a href="/privacy.html">Política de privacidade</a>
+        <div class="my-2 border-b w-full"></div>
+
+        <div class="mb-4">
+            <p class="text-xs text-muted-foreground mb-1">Informe a intenção de commit</p>
+            <div class="grid grid-cols-4 gap-2 mb-2">
+                <div>
+                    <input class="hidden" type="radio" name="type" id="feat" value="[FEAT]" checked>
+                    <label class="block w-full border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer text-xs text-center font-semibold" for="feat">FEAT</label>
+                </div>
+                <div>
+                    <input class="hidden" type="radio" name="type" id="fix" value="[FIX]">
+                    <label class="block w-full border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer text-xs text-center font-semibold" for="fix">FIX</label>
+                </div>
+                <div>
+                    <input class="hidden" type="radio" name="type" id="refact" value="[REFACT]">
+                    <label class="block w-full border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer text-xs text-center font-semibold" for="refact">REFACT</label>
+                </div>
+                <div>
+                    <input class="hidden" type="radio" name="type" id="partial" value="[PARTIAL]">
+                    <label class="block w-full border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer text-xs text-center font-semibold" for="partial">PARTIAL</label>
+                </div>
+            </div>
+
+            <p class="text-xs text-muted-foreground mb-1">Copie a informação desejada</p>
+            <ul id="options">
+                <li class="border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer">
+                    <span class="text-muted-foreground text-sm">Sub\Tarefa</span>
+                    <p id="issue-id">carregando...</p>
+                </li>
+
+                <li class="border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer">
+                    <span class="text-muted-foreground text-sm">Branch</span>
+                    <p id="issue-branch">carregando...</p>
+                </li>
+
+                <li class="border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer">
+                    <span class="text-muted-foreground text-sm">Comentário para check-in</span>
+                    <p id="issue-checkin-note">carregando...</p>
+                </li>
+
+                <li class="border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer">
+                    <span class="text-muted-foreground text-sm">Descrição para o cliente</span>
+                    <p id="issue-customer-description">carregando...</p>
+                </li>
+                
+                <li class="border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer">
+                    <span class="text-muted-foreground text-sm">Pull request completo</span>
+                    <p id="issue-pull-request">carregando...</p>
+                </li>
+                
+            </ul>
+        </div>
+
+        <div class="w-full text-center flex gap-4 items-center justify-center mb-2">
+            <a class="text-xs font-medium text-muted-foreground hover:text-accent-foreground" href="https://github.com/AugustoHTPereira/totvs-jira-helper/issues/new" target="_blank">Estou com problemas</a>
+            <a class="text-xs font-medium text-muted-foreground hover:text-accent-foreground" href="https://github.com/AugustoHTPereira/totvs-jira-helper" target="_blank">GitHub</a>
+        </div>
+
+        <div class="w-full text-center flex gap-4 items-center justify-center">
+            <a class="text-xs font-medium text-muted-foreground hover:text-accent-foreground" href="https://www.notion.so/augustohtpereira/TOTVS-Jira-Helper-1cbe1f08557580a1bd40cfe4c5caf17c?pvs=4" target="_blank">Política de privacidade</a>
+        </div>
+    </div>
+
+    <div class="fixed b-0 w-full max-w-sm left-[50%] translate-x-[-50%] text-center text-sm hidden" id="copy-succeeded-notification">
+        <div class="p-4 border rounded-lg shadow bg-accent text-accent-foreground">
+            <p>Conteúdo copiado para área de transferência</p>
+        </div>
+    </div>
 </body>
 <script src="popup.js"></script>
 </html>

@@ -10,7 +10,7 @@ TOTVS Jira Helper é uma extensão leve e prática que permite ao usuário visua
 ## 📦 Instalação
 
 1. Acesse a extensão pelo Chrome Web Store clicando no link
-https://chromewebstore.google.com/detail/phldiacidhdfcalmhgebfncipidhmdmc?utm_source=item-share-cb
+https://chromewebstore.google.com/detail/phldiacidhdfcalmhgebfncip  idhmdmc?utm_source=item-share-cb
 2. Clique em Usar no Chrome
 
 ## 🧠 Como Usar
