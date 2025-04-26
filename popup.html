@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/tw-styles.css">
 </head>
-<body class="dark">
-    <div class="w-full max-w-sm mx-auto p-1">
+<body class="dark w-[535px]">
+    <div class="p-6">
         <div>
             <h1 class="font-semibold">TOTVS Jira Helper</h1>
         </div>
@@ -27,8 +27,8 @@
                     <label class="block w-full border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer text-xs text-center font-semibold" for="fix">FIX</label>
                 </div>
                 <div>
-                    <input class="hidden" type="radio" name="type" id="refact" value="[REFACT]">
-                    <label class="block w-full border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer text-xs text-center font-semibold" for="refact">REFACT</label>
+                    <input class="hidden" type="radio" name="type" id="merge" value="[MERGE]">
+                    <label class="block w-full border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer text-xs text-center font-semibold" for="merge">MERGE</label>
                 </div>
                 <div>
                     <input class="hidden" type="radio" name="type" id="partial" value="[PARTIAL]">
@@ -37,29 +37,29 @@
             </div>
 
             <p class="text-xs text-muted-foreground mb-1">Copie a informação desejada</p>
-            <ul id="options">
+            <ul id="options" class="text-sm">
                 <li class="border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer">
-                    <span class="text-muted-foreground text-sm">Sub\Tarefa</span>
+                    <span class="text-muted-foreground text-xs">Sub\Tarefa</span>
                     <p id="issue-id">carregando...</p>
                 </li>
 
                 <li class="border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer">
-                    <span class="text-muted-foreground text-sm">Branch</span>
+                    <span class="text-muted-foreground text-xs">Branch</span>
                     <p id="issue-branch">carregando...</p>
                 </li>
 
                 <li class="border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer">
-                    <span class="text-muted-foreground text-sm">Comentário para check-in</span>
+                    <span class="text-muted-foreground text-xs">Comentário para check-in</span>
                     <p id="issue-checkin-note">carregando...</p>
                 </li>
 
                 <li class="border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer">
-                    <span class="text-muted-foreground text-sm">Descrição para o cliente</span>
+                    <span class="text-muted-foreground text-xs">Descrição para o cliente</span>
                     <p id="issue-customer-description">carregando...</p>
                 </li>
                 
                 <li class="border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer">
-                    <span class="text-muted-foreground text-sm">Pull request completo</span>
+                    <span class="text-muted-foreground text-xs">Pull request completo</span>
                     <p id="issue-pull-request">carregando...</p>
                 </li>
                 
