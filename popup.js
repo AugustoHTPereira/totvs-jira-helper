@@ -1,5 +1,4 @@
 const copySucceededNotification = document.getElementById("copy-succeeded-notification");
-
 const issueId = document.getElementById("issue-id");
 const issueBranch = document.getElementById("issue-branch");
 const issueCheckinNote = document.getElementById("issue-checkin-note");
@@ -12,9 +11,11 @@ let currentIssueInfo = {};
 const pullRequestTemplate = () => {
     const { taskId, subTaskId, taskName } = currentIssueInfo;
 
-    return `- CodigoIssue:[${taskId}\\${subTaskId}]
-        - DescricaoCliente:[${taskName}]
-        ${modificationType} ${taskName}
+    return `
+    - CodigoIssue:[${subTaskId}\\${taskId}]
+    - DescricaoCliente:[${taskName}]
+
+    ${modificationType} ${taskName}
     `;
 };
 
@@ -86,9 +87,9 @@ window.onload = () => {
                     const subTaskElement = document.getElementById("key-val");
                     
                     return {
-                        taskId: taskElement?.getAttribute("data-issue-key") ?? "error while getting task id",
-                        subTaskId: subTaskElement?.getAttribute("data-issue-key") ?? "error while getting subtask id",
-                        taskName: taskElement?.innerText ?? "error while getting task name",
+                        taskId: taskElement?.getAttribute("data-issue-key") ?? "unknown",
+                        subTaskId: subTaskElement?.getAttribute("data-issue-key") ?? "unknown",
+                        taskName: taskElement?.innerText ?? "unknown",
                     }
                 },
             },
