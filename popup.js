@@ -87,8 +87,8 @@ window.onload = () => {
                     const subTaskElement = document.getElementById("key-val");
                     
                     return {
-                        taskId: taskElement?.getAttribute("data-issue-key") ?? "unknown",
-                        subTaskId: subTaskElement?.getAttribute("data-issue-key") ?? "unknown",
+                        taskId: taskElement?.dataset.issueKey ?? "unknown",
+                        subTaskId: subTaskElement?.dataset.issueKey ?? "unknown",
                         taskName: taskElement?.innerText ?? "unknown",
                     }
                 },
