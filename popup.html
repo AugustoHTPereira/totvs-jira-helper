@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <p class="text-xs text-muted-foreground mb-1">Copie a informação desejada</p>
+            <p class="text-xs text-muted-foreground mb-1">Clique sobre a informação para copiar</p>
             <ul id="options" class="text-sm">
                 <li class="border rounded-lg shadow py-2 px-4 mb-2 hover:bg-accent hover:text-accent-foreground cursor-pointer">
                     <span class="text-muted-foreground text-xs">Sub\Tarefa</span>
@@ -76,8 +76,8 @@
         </div>
     </div>
 
-    <div class="fixed b-0 w-full max-w-sm left-[50%] translate-x-[-50%] text-center text-sm hidden" id="copy-succeeded-notification">
-        <div class="p-4 border rounded-lg shadow bg-accent text-accent-foreground">
+    <div class="fixed w-full max-w-sm left-[50%] translate-x-[-50%] text-center text-sm hidden animate transition" id="copy-succeeded-notification" style="top: 12px;">
+        <div class="p-4 border rounded-lg shadow text-accent-foreground" style="backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);">
             <p>Conteúdo copiado para área de transferência</p>
         </div>
     </div>

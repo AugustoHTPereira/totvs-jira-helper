@@ -9,13 +9,13 @@ let modificationType = '[FEAT]';
 let currentIssueInfo = {};
 
 const pullRequestTemplate = () => {
-    const { taskId, subTaskId, taskName } = currentIssueInfo;
+    const { taskId, subTaskId } = currentIssueInfo;
 
     return `
     - CodigoIssue:[${subTaskId}\\${taskId}]
-    - DescricaoCliente:[${taskName}]
+    - DescricaoCliente:[${formatCustomerDescription()}]
 
-    ${modificationType} ${taskName}
+    ${formatIssueName()}
     `;
 };
 
@@ -23,7 +23,7 @@ const showCopySucceededNotification = () => {
     copySucceededNotification.classList.remove("hidden");
     setTimeout(() => {
         copySucceededNotification.classList.add("hidden");
-    }, 3*1000);
+    }, 5*1000);
 }
 
 const copyElementInnerTextToClipboard = (element) => {
@@ -47,21 +47,47 @@ const handleSetIssueBranch = () => {
     issueBranch.innerText = subTaskId;
 }
 
+const formatIssueName = () => {
+    const { taskName, taskSummary, commitIntent } = currentIssueInfo;
+    let formattedName = `${modificationType} ${taskName}`;
+
+    if (taskSummary && taskSummary !== taskName && commitIntent === "[FIX]") {
+        const cleanSummary = taskSummary.includes('-') && taskSummary.startsWith('EV') 
+            ? taskSummary.split('-').slice(1).join('-').trim() 
+            : taskSummary;
+
+        formattedName += ` - ${cleanSummary}`;
+    }
+
+    return formattedName;
+}
+
 const handleSetIssueCheckinNote = () => {
+    issueCheckinNote.innerText = formatIssueName();
+}
+
+const formatCustomerDescription = () => {
     const { taskName } = currentIssueInfo;
-    issueCheckinNote.innerText = `${modificationType} ${taskName}`;
+    return taskName;
 }
 
 const handleSetIssueCustomerDescription = () => {
-    const { taskName } = currentIssueInfo;
-    issueCustomerDescription.innerText = taskName;
+    issueCustomerDescription.innerText = formatCustomerDescription();
 }
 
 const handleSetIssuePullRequest = () => {
     issuePullRequest.innerText = pullRequestTemplate();
 }
 
+const handleSetIssueType = () => {
+    const { commitIntent } = currentIssueInfo;
+    document.querySelector(`input[name="type"][value="${commitIntent}"]`)?.setAttribute("checked", "checked");
+    modificationType = commitIntent;
+}
+
 const handleSetIssueScreenValues = () => {
+    console.log(currentIssueInfo);
+    handleSetIssueType();
     handleSetIssueBranch();
     handleSetIssueCheckinNote();
     handleSetIssueCustomerDescription();
@@ -83,19 +109,38 @@ window.onload = () => {
             {
                 target: { tabId: tabs[0].id },
                 func: () => {
-                    const taskElement = document.getElementById("parent_issue_summary");
-                    const subTaskElement = document.getElementById("key-val");
+                    const getTypeFromImageId = (imageId) => {
+                        const issueTypeOptions = {
+                            '10306': '[FEAT]',
+                            '20435': '[FIX]',
+                            '20426': '[MERGE]',
+                        }
+
+                        if (!imageId)
+                            return '[FEAT]';
+
+                        return issueTypeOptions[imageId] || '[FEAT]';
+                    };
+
+                    const url = new URL(document.querySelector("#type-val img")?.src);
+                    const avatarId = url.searchParams.get("avatarId");
                     
                     return {
-                        taskId: taskElement?.dataset.issueKey ?? "unknown",
-                        subTaskId: subTaskElement?.dataset.issueKey ?? "unknown",
-                        taskName: taskElement?.innerText ?? "unknown",
+                        taskId: document.getElementById("parent_issue_summary")?.dataset.issueKey?.trim() ?? "unknown",
+                        subTaskId: document.getElementById("key-val")?.dataset.issueKey?.trim() ?? "unknown",
+                        taskName: document.getElementById("parent_issue_summary")?.innerText?.trim() ?? "unknown",
+                        taskSummary: document.querySelector("#summary-val")?.innerText?.trim() ?? "unknown",
+                        commitIntent: getTypeFromImageId(avatarId) ?? "[FEAT]",
                     }
                 },
             },
             (results) => {
                 const { result } = results[0] ?? {};
-                currentIssueInfo = result;
+                
+                if (!result)
+                    return;
+                
+                currentIssueInfo = result || {};
                 handleSetIssueScreenValues();
             }
         );
