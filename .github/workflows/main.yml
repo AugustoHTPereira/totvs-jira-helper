@@ -1,0 +1,25 @@
+name: Publicar Extensão
+
+on:
+  push:
+    tags:
+      - 'v*' # Executa quando você cria uma tag (ex: v1.0.1)
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Criar Pacote ZIP
+        run: zip -r extension.zip . -x "*.git*" ".github*" # Compacta os arquivos ignorando pastas do git
+
+      - name: Upload & Publish
+        uses: mnao305/chrome-extension-upload@v6.0.0
+        with:
+          file-path: extension.zip
+          extension-id: ${{ secrets.EXTENSION_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
+          publish: true # Define como 'false' se quiser apenas fazer o upload sem publicar
