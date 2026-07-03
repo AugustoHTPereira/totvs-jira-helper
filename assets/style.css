@@ -24,3 +24,27 @@ body {
 input:checked + label {
     background-color: hsl(var(--accent));
 }
+
+.totvs-preview-box:hover {
+    background-color: #ebecf0 !important;
+    border-color: #0052cc !important;
+    color: #0052cc !important;
+}
+
+.totvs-copy-btn {
+    border-radius: 3px;
+    transition: background 0.1s ease;
+}
+
+.totvs-copy-btn:hover {
+    background-color: rgba(9, 30, 66, 0.08) !important;
+}
+
+/* Aljustes para scrollbar interna nos previews longos */
+.totvs-preview-box::-webkit-scrollbar {
+    height: 4px;
+}
+.totvs-preview-box::-webkit-scrollbar-thumb {
+    background: #c1c7d0;
+    border-radius: 2px;
+}

@@ -1,13 +1,17 @@
 {
     "manifest_version": 3,
     "name": "TOTVS Jira Helper",
-    "version": "3.0.0",
-    "description": "Obter dados da issue",
+    "version": "4.0.0",
+    "description": "Adiciona facilitador de formatação para Code Reviews e Pull Requests no Jira da TOTVS",
     "permissions": [
         "scripting",
         "activeTab"
     ],
-    "action": {
-        "default_popup": "popup.html"
+    "content_scripts": [
+    {
+      "matches": ["https://jiraproducao.totvs.com.br/browse/*"],
+      "js": ["content.js"],
+      "css": ["assets/style.css"]
     }
+  ]
 }
