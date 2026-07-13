@@ -1,16 +1,32 @@
+// Verifica se o tipo informado representa um chamado de defeito/bug
+function isDefectType(issueType) {
+  const t = issueType ? issueType.toUpperCase().trim() : "";
+  return (
+    t.includes("DEFEITO") ||
+    t.includes("BUG") ||
+    t.includes("CORREÇÃO") ||
+    t.includes("CORRECAO")
+  );
+}
+
+// Extrai a descrição real do defeito, removendo prefixos técnicos
+// como "EV (Bug) - V2610 - ORACLE - " antes da descrição do problema
+function extractDefectDescription(summary) {
+  if (!summary) return "";
+  const parts = summary
+    .split(" - ")
+    .map((part) => part.trim())
+    .filter(Boolean);
+  return parts.length > 0 ? parts[parts.length - 1] : summary.trim();
+}
+
 // Matriz de decisão inteligente baseada nas regras informadas
 function getAutoCommitType(parentType, subTaskType) {
   const pType = parentType ? parentType.toUpperCase().trim() : "";
   const sType = subTaskType ? subTaskType.toUpperCase().trim() : "";
 
   if (sType.includes("MERGE")) return "MERGE";
-  if (
-    sType.includes("DEFEITO") ||
-    sType.includes("BUG") ||
-    sType.includes("CORREÇÃO") ||
-    sType.includes("CORRECAO")
-  )
-    return "FIX";
+  if (isDefectType(sType)) return "FIX";
 
   if (sType.includes("CODIFICAÇÃO") || sType.includes("CODIFICACAO")) {
     if (pType.includes("MANUTENÇÃO") || pType.includes("MANUTENCAO"))
@@ -108,6 +124,16 @@ async function loadJiraDataAndBuild() {
 
     const defaultCommitType = getAutoCommitType(parentType, subTaskType);
 
+    // Em chamados de defeito/bug, o check-in deve contemplar a descrição
+    // do defeito (sub-task) além da descrição do chamado pai
+    const isDefectSubTask = isDefectType(subTaskType);
+    const defectDescription = isDefectSubTask
+      ? extractDefectDescription(issueData.fields.summary)
+      : "";
+    const checkinTaskName = defectDescription
+      ? `${taskName} - ${defectDescription}`
+      : taskName;
+
     // Construção da Interface do Helper
     const helperGroup = document.createElement("div");
     helperGroup.id = "totvs-helper-group";
@@ -140,7 +166,7 @@ async function loadJiraDataAndBuild() {
       {
         label: "Check-in",
         id: "totvs-text-checkin",
-        generate: (type) => `[${type}] ${taskId} ${taskName}`,
+        generate: (type) => `[${type}] ${taskId} ${checkinTaskName}`,
         isMultiline: true,
       },
       {
@@ -154,7 +180,7 @@ async function loadJiraDataAndBuild() {
         id: "totvs-text-pr",
         isMultiline: true,
         generate: (type) =>
-          `- CodigoIssue:[${subTaskId}\\${taskId}]\n- DescricaoCliente:[${taskName}]\n\n[${type}] ${taskId} - ${taskName}`,
+          `- CodigoIssue:[${subTaskId}\\${taskId}]\n- DescricaoCliente:[${taskName}]\n\n[${type}] ${taskId} - ${checkinTaskName}`,
       },
     ];
 

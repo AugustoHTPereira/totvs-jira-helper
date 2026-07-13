@@ -1,0 +1,50 @@
+*, :after, :before {
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+    border-color: hsl(var(--border));
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    overscroll-behavior: none;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    line-height: inherit;
+}
+
+input:checked + label {
+    background-color: hsl(var(--accent));
+}
+
+.totvs-preview-box:hover {
+    background-color: #ebecf0 !important;
+    border-color: #0052cc !important;
+    color: #0052cc !important;
+}
+
+.totvs-copy-btn {
+    border-radius: 3px;
+    transition: background 0.1s ease;
+}
+
+.totvs-copy-btn:hover {
+    background-color: rgba(9, 30, 66, 0.08) !important;
+}
+
+/* Aljustes para scrollbar interna nos previews longos */
+.totvs-preview-box::-webkit-scrollbar {
+    height: 4px;
+}
+.totvs-preview-box::-webkit-scrollbar-thumb {
+    background: #c1c7d0;
+    border-radius: 2px;
+}
